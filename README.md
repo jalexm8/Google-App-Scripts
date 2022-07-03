@@ -16,7 +16,7 @@
   <h3 align="center">Google Apps Script</h3>
 
   <p align="center">
-    A collection of Google App Scripts that can be used by yourself/an organisation.
+    A collection of Google Apps Scripts that can be used by yourself/an organisation.
     <br />
     <a href="https://github.com/jalexm8/Google-App-Scripts"><strong>Explore the docs »</strong></a>
     <br />
