@@ -60,7 +60,10 @@ Can we replace an annual leave system with Google Apps Script? Lets find out!
 ## Getting Started
 
 ### Prerequisites
-* A Google account
+* A Google account.
+* You need to create:  
+  * A Google form (to act as a "PTO request form").
+  * 
 
 ### Installation
 
