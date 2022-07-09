@@ -2,7 +2,7 @@
 <br />
 <div align="center">
 
-  <h3 align="center">Annual Leave System - Google Apps Script Replacement</h3>
+  <h3 align="center">PTO Request System - Google Apps Script Replacement</h3>
 
   <p align="center">
     An awesome README template to jumpstart your projects!
@@ -50,7 +50,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Can we replace an annual leave system with Google Apps Script? Lets find out!
+Can we replace an PTO Request system with Google Apps Script? Lets find out!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
