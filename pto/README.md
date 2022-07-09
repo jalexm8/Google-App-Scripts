@@ -35,6 +35,9 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <ul>
+          <li><a href="#`pto_form.js`">`pto_form.js`</a></li>
+        </ul>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -62,20 +65,29 @@ Can we replace an annual leave system with Google Apps Script? Lets find out!
 ### Prerequisites
 * A Google account.
 * You need to create:  
-  * A Google form (to act as a "PTO request form").
-  * 
+  * A Google Form (to act as a "PTO request form").
+    1. Navigate to https://drive.google.com/drive/my-drive.
+    2. Create a blank Google form.
+    3. Fill in the following:
+        * Title: "PTO Request Form"
+        * 1st Question: "Start Date"
+        * 2nd Question: "End Date"
+        * Ensure email collection is enabled in settings.
+  * A Google Sheet (to acts as a "database" _yuck_).
+    1. Navigate to https://drive.google.com/drive/my-drive.
+    2. Create a blank Google sheet.
+    3. Insert the headers like: `name,	email,	line manager email,	pto allowance,	pto remaining,	pto requested,	pto authorised`
 
 ### Installation
-
-Copy:
-* 1st file to x.
-* 2nd file to y.
+#### `pto_form.js`
+  1. Open up the "PTO request form" Google form.
+  2. Press the kebab menu (top right) -> Script editor.
+  3. Paste the contents of `pto_form.js` and save.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
 _Coming soon_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
