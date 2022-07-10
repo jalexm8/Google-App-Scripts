@@ -154,8 +154,18 @@ function formResponsesToArray() {
   
     var prevRequestedTotal = dataSheet.getRange(userRow, PTOREQUESTEDCOLUMN).getValue();
     dataSheet.getRange(userRow, PTOREQUESTEDCOLUMN).setValue(prevRequestedTotal + ptoDaysRequested);
+  }
+
+  function updateCalender(userResponses, dataSheet, userRow) {
+    const USERNAMECOLUMN = 1;
   
+    var userName = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
+    var calendarID = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
+    var prevCalEvents = calendarID.getEvents(userResponses['start date'], userResponses['end date'], {search: userName + '[PENDING]'});
   
+    for ( var i = 0; i < prevCalEvents.length ; i++) {
+      prevCalEvents[i].setTitle(userName + ' - [APPROVED]');
+    }
   }
   
   function onFormSubmit(e) {
@@ -177,6 +187,7 @@ function formResponsesToArray() {
   
       sendLineManagerEmail(userResponses, ptoDaysRequested);
       sendUserEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
+      updateCalender(userResponses, dataSheet, userRow)
     }
   }
   

@@ -114,6 +114,15 @@ function sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequeste
   });
 }
 
+function addPendingPtoToCal(userResponses, dataSheet, userRow) {
+  const USERNAMECOLUMN = 1;
+
+  var userName = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
+  var calendarID = CalendarApp.getCalendarById('<CAL_ID>');
+
+  calendarID.createAllDayEvent(userName + ' - [PENDING]', userResponses['start date'], userResponses['end date']);
+}
+
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
   var spreadSheet = SpreadsheetApp.openById("<SPREADSHEET_ID>");
@@ -128,5 +137,6 @@ function onFormSubmit(e) {
     addRequestedDaysToSpreadSheet(dataSheet, userRow, ptoDaysRequested);
     sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
     sendSuccessEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
+    addPendingPtoToCal(userResponses, dataSheet, userRow);
   }
 }
