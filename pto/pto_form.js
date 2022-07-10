@@ -110,13 +110,13 @@ function sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequeste
               "Total PTO: " + ptoDaysRequested + "<br>" +
               "<br>" +
               "Follow the below link to approve:<br>" +
-              "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
+              "https://docs.google.com/forms/d/e/<FORM_ID>/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
   });
 }
 
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
-  var spreadSheet = SpreadsheetApp.openById("1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU");
+  var spreadSheet = SpreadsheetApp.openById("<SPREADSHEET_ID>");
   var dataSheet = spreadSheet.getSheetByName('data');
   var userRow = getUserRow(dataSheet, userResponses['email']);
   var errorMsg = errorChecking(userResponses['start date'], userResponses['end date'], dataSheet, userRow);
