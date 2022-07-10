@@ -101,7 +101,7 @@ _Coming soon_
 
 <!-- ROADMAP -->
 ## Roadmap
-- [ ] Create annual leave system within Google Apps Scripts
+Please see the roadmap within the individual directories for more information.
 
 See the [open issues](https://github.com/jalexm8/Google-App-Scripts/issues) for a full list of proposed features (and known issues).
 
