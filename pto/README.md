@@ -111,7 +111,7 @@ _Coming soon_
 
 <!-- ROADMAP -->
 ## Roadmap
-- [ x ] Create PTO system within Google Apps Scripts.
+- [x] Create PTO system within Google Apps Scripts.
 - [ ] Google Calendar integration.
 - [ ] Google Chat integration.
 - [ ] Pending request reminder.
