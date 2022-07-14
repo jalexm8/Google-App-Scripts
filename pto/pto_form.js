@@ -120,14 +120,20 @@ function sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequeste
 }
 
 function addPendingPtoToCal(userResponses, dataSheet, userRow) {
-  const USERNAMECOLUMN = 1;
+  const USERNAMECOLUMN   = 1;
+  const LINEMANAGEREMAIL = 3;
 
-  var userName     = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
-  var googleCal    = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
-  var day          = 60 * 60 * 24 * 1000;
-  var endDatePlus1 = new Date(userResponses['end date'].getTime() + day);
+  var userName             = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
+  var googleCal            = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
+  var day                  = 60 * 60 * 24 * 1000;
+  var endDatePlus1         = new Date(userResponses['end date'].getTime() + day);
+  var userLineManagerEmail = dataSheet.getRange(userRow, LINEMANAGEREMAIL).getValue();
+  var invitees             = userResponses['email'] + "," + userLineManagerEmail;
 
-  googleCal.createAllDayEvent(userName + ' - [PENDING]', userResponses['start date'], endDatePlus1);
+  googleCal.createAllDayEvent(userName + ' - [PENDING]',
+    userResponses['start date'],
+    endDatePlus1,
+    {guests: invitees , sendInvites: true});
 }
 
 function checkCalendar(userResponses, dataSheet, userRow) {
