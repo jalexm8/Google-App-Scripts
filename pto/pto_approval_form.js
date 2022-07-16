@@ -169,6 +169,29 @@ function updateCalender(userResponses, dataSheet, userRow) {
   }
 }
 
+function deleteRequestRow(userResponses, spreadSheet) {
+  var pendingFormSheet     = spreadSheet.getSheetByName('pendingPtoApprovalForms');
+  var requestRow           = getRequestRow(userResponses, pendingFormSheet);
+
+  Logger.log(requestRow);
+
+  pendingFormSheet.deleteRow(requestRow);
+}
+
+function getRequestRow(userResponses, pendingFormSheet) {
+  const APPROVALEMAILCOLUMN = 5;
+
+  var sheetValues  = pendingFormSheet.getDataRange().getValues();
+  var approvalForm = "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['user email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
+
+  for ( var i = 0; i < sheetValues.length ; i++) {
+    Logger.log("Comparing: " + approvalForm + " | " + sheetValues[i][APPROVALEMAILCOLUMN]);
+    if ( sheetValues[i][APPROVALEMAILCOLUMN] == approvalForm) {
+      return i+1;
+    }
+  }
+}
+
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
   var spreadSheet   = SpreadsheetApp.openById("1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU");
@@ -176,7 +199,7 @@ function onFormSubmit(e) {
   var userRow       = getUserRow(dataSheet, userResponses['user email']);
   var errorMsg      = errorChecking(userResponses['start date'], userResponses['end date'], dataSheet, userRow);
 
-    if ( errorMsg.length > 0 ) {
+  if ( errorMsg.length > 0 ) {
     sendErrorEmail(errorMsg, userResponses['line manager email']);
   } else {
     var ptoDaysRequested = daysBetweenStartAndEndDate(userResponses['start date'], userResponses['end date']);
@@ -188,6 +211,7 @@ function onFormSubmit(e) {
 
     sendLineManagerEmail(userResponses, ptoDaysRequested);
     sendUserEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
-    updateCalender(userResponses, dataSheet, userRow)
+    updateCalender(userResponses, dataSheet, userRow);
+    deleteRequestRow(userResponses, spreadSheet);
   }
 }

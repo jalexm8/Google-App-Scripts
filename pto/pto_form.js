@@ -154,6 +154,30 @@ function checkCalendar(userResponses, dataSheet, userRow) {
   return eventOnCal;
 }
 
+function addFormToSheet(userResponses, spreadSheet, dataSheet, userRow) {
+  const USERNAMECOLUMN        = 1;
+  const USEREMAILCOLUMN       = 2;
+  const LINEMANAGEREMAIL      = 3;
+  const STARTDATECOLUMN       = 4;
+  const ENDDATECOLUMN         = 5;
+  const APPROVALFORMCOLUMN    = 6;
+  const DAYSNOTAPPROVEDCOLUMN = 7;
+  
+  var pendingFormSheet     = spreadSheet.getSheetByName('pendingPtoApprovalForms');
+  var lastRow              = pendingFormSheet.getLastRow() + 1;
+  var approvalForm         = "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved";
+  var userLineManagerEmail = dataSheet.getRange(userRow, LINEMANAGEREMAIL).getValue();
+  var userName             = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
+
+  pendingFormSheet.getRange(lastRow, USERNAMECOLUMN).setValue(userName);
+  pendingFormSheet.getRange(lastRow, USEREMAILCOLUMN).setValue(userResponses['email']);
+  pendingFormSheet.getRange(lastRow, LINEMANAGEREMAIL).setValue(userLineManagerEmail);
+  pendingFormSheet.getRange(lastRow, STARTDATECOLUMN).setValue(String(userResponses['form start date']));
+  pendingFormSheet.getRange(lastRow, ENDDATECOLUMN).setValue(String(userResponses['form end date']));
+  pendingFormSheet.getRange(lastRow, APPROVALFORMCOLUMN).setValue(approvalForm);
+  pendingFormSheet.getRange(lastRow, DAYSNOTAPPROVEDCOLUMN).setValue(0);
+}
+
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
   var spreadSheet   = SpreadsheetApp.openById("1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU");
@@ -169,5 +193,6 @@ function onFormSubmit(e) {
     sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
     sendSuccessEmail(userResponses, dataSheet, userRow, ptoDaysRequested);
     addPendingPtoToCal(userResponses, dataSheet, userRow);
-  }
+    addFormToSheet(userResponses, spreadSheet, dataSheet, userRow);
+    }
 }
