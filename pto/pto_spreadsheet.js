@@ -3,7 +3,7 @@ const PTOFORMS_LINEMANAGERCOLUMN     = 3;
 const PTOFORMS_APPROVALFORMCOLUMN    = 6;
 const PTOFORMS_DAYSNOTAPPROVEDCOLUMN = 7;
 
-var spreadSheetID         = "1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU";
+var spreadSheetID         = "<SPREADSHEET_ID_HERE></SPREADSHEET_ID_HERE>";
 var ptoFromSheetName      = "pendingPtoApprovalForms";
 var spreadSheet           = SpreadsheetApp.openById(spreadSheetID);
 var ptoFormsSheet         = spreadSheet.getSheetByName(ptoFromSheetName);

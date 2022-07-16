@@ -153,7 +153,7 @@ function addApprovedDaysToSpreadSheet(dataSheet, userRow, ptoDaysRequested) {
 function updateCalender(userResponses, dataSheet, userRow) {
   const USERNAMECOLUMN = 1;
   var userName         = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
-  var calendarID       = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
+  var calendarID       = CalendarApp.getCalendarById(<CAL_ID_HERE></CAL_ID_HERE>);
   var day              = 60 * 60 * 24 * 1000;
   var endDatePlus1     = new Date(userResponses['end date'].getTime() + day);
   var prevCalEvents    = calendarID.getEvents(userResponses['start date'], endDatePlus1, {search: userName + '[PENDING]'});
@@ -182,7 +182,7 @@ function getRequestRow(userResponses, pendingFormSheet) {
   const APPROVALEMAILCOLUMN = 5;
 
   var sheetValues  = pendingFormSheet.getDataRange().getValues();
-  var approvalForm = "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['user email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
+  var approvalForm = "https://docs.google.com/forms/d/e/<FORM_ID_HERE></FORM_ID_HERE>/viewform?usp=pp_url&entry.1215773484=" + userResponses['user email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
 
   for ( var i = 0; i < sheetValues.length ; i++) {
     Logger.log("Comparing: " + approvalForm + " | " + sheetValues[i][APPROVALEMAILCOLUMN]);
@@ -194,7 +194,7 @@ function getRequestRow(userResponses, pendingFormSheet) {
 
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
-  var spreadSheet   = SpreadsheetApp.openById("1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU");
+  var spreadSheet   = SpreadsheetApp.openById(<SPREADSHEET_ID_HERE></SPREADSHEET_ID_HERE>);
   var dataSheet     = spreadSheet.getSheetByName('data');
   var userRow       = getUserRow(dataSheet, userResponses['user email']);
   var errorMsg      = errorChecking(userResponses['start date'], userResponses['end date'], dataSheet, userRow);

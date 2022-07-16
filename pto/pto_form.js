@@ -115,7 +115,7 @@ function sendLineManagerEmail(userResponses, dataSheet, userRow, ptoDaysRequeste
               "Total PTO: " + ptoDaysRequested + "<br>" +
               "<br>" +
               "Follow the below link to approve:<br>" +
-              "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
+              "https://docs.google.com/forms/d/e/<FORM_ID_HERE></FORM_ID_HERE>/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved"
   });
 }
 
@@ -124,7 +124,7 @@ function addPendingPtoToCal(userResponses, dataSheet, userRow) {
   const LINEMANAGEREMAIL = 3;
 
   var userName             = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
-  var googleCal            = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
+  var googleCal            = CalendarApp.getCalendarById(<CAL_ID_HERE></CAL_ID_HERE>);
   var day                  = 60 * 60 * 24 * 1000;
   var endDatePlus1         = new Date(userResponses['end date'].getTime() + day);
   var userLineManagerEmail = dataSheet.getRange(userRow, LINEMANAGEREMAIL).getValue();
@@ -140,7 +140,7 @@ function checkCalendar(userResponses, dataSheet, userRow) {
   const USERNAMECOLUMN = 1;
 
   var userName          = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
-  var googleCal         = CalendarApp.getCalendarById('4tjmhngnv91r81cje3tl999jf4@group.calendar.google.com');
+  var googleCal         = CalendarApp.getCalendarById(<CAL_ID_HERE></CAL_ID_HERE>);
   var day               = 60 * 60 * 24 * 1000;
   var endDatePlus1      = new Date(userResponses['end date'].getTime() + day);
   var pendingCalEvents  = googleCal.getEvents(userResponses['start date'], endDatePlus1, {search: userName + '[PENDING]'});
@@ -165,7 +165,7 @@ function addFormToSheet(userResponses, spreadSheet, dataSheet, userRow) {
   
   var pendingFormSheet     = spreadSheet.getSheetByName('pendingPtoApprovalForms');
   var lastRow              = pendingFormSheet.getLastRow() + 1;
-  var approvalForm         = "https://docs.google.com/forms/d/e/1FAIpQLSc0MhH8T8Box-KaSTXUEGtvU643_adCwIsX6dVhgkxleOSa8g/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved";
+  var approvalForm         = "https://docs.google.com/forms/d/e/<FORM_ID_HERE></FORM_ID_HERE>/viewform?usp=pp_url&entry.1215773484=" + userResponses['email'] + "&entry.2132041378=" + userResponses['form start date'] + "&entry.1828168590=" + userResponses['form end date'] + "&entry.1716043255=Approved";
   var userLineManagerEmail = dataSheet.getRange(userRow, LINEMANAGEREMAIL).getValue();
   var userName             = dataSheet.getRange(userRow, USERNAMECOLUMN).getValue();
 
@@ -180,7 +180,7 @@ function addFormToSheet(userResponses, spreadSheet, dataSheet, userRow) {
 
 function onFormSubmit(e) {
   var userResponses = formResponsesToArray();
-  var spreadSheet   = SpreadsheetApp.openById("1HsG9B7Mrk_oJ6cLfaPoX9FyGwHZnp42Y_TGK-AoG9HU");
+  var spreadSheet   = SpreadsheetApp.openById(<SPREADSHEET_ID_HERE></SPREADSHEET_ID_HERE>);
   var dataSheet     = spreadSheet.getSheetByName('data');
   var userRow       = getUserRow(dataSheet, userResponses['email']);
   var errorMsg      = errorChecking(userResponses, dataSheet, userRow);
